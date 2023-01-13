@@ -1,11 +1,11 @@
 // import { useFormik } from "formik";
-import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch } from "react-redux";
-// import { postData } from "../../redux/slice/getData";
-// import { productSchema } from "../../schema";
+import { postData } from "../../redux/slice/getData";
+import { productSchema } from "../../schema";
 import "./index.scss";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
@@ -24,9 +24,18 @@ const AddProduct = () => {
   //     },
   //   });
 
-  const { register, handleSubmit } = useForm();
-  const [data, setData] = useState("");
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(productSchema),
+  });
+  const onSubmit = (data) => {
+    reset();
+    dispatch(postData(data));
+  };
   return (
     <div id="add-product-page">
       <Helmet>
@@ -114,15 +123,55 @@ const AddProduct = () => {
             </div>
           </form>
         </div> */}
+        <div className="add-product">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="input-control">
+              <p>
+                <label htmlFor="name">Name:</label>
+              </p>
+              <input {...register("name")} placeholder="Name" />
+              <div style={{ color: "red", fontSize: "13px" }}>
+                {errors.name?.message}
+              </div>
+            </div>
 
-        <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
-          <input {...register("name")} placeholder="Name" />
-          <input {...register("price")} placeholder="Price" />
-          <textarea {...register("description")} placeholder="Description" />
-          <input {...register("imgUrl")} placeholder="Image url" />
-          {console.log(data)}
-          <input type="submit" />
-        </form>
+            <div className="input-control">
+              <p>
+                <label htmlFor="price">Price:</label>
+              </p>
+              <input {...register("price")} placeholder="Price" />
+              <div style={{ color: "red", fontSize: "13px" }}>
+                {errors.price?.message}
+              </div>
+            </div>
+
+            <div className="input-control">
+              <p>
+                <label htmlFor="description">Description:</label>
+              </p>
+              <textarea
+                {...register("description")}
+                placeholder="Description"
+              />
+              <div style={{ color: "red", fontSize: "13px" }}>
+                {errors.description?.message}
+              </div>
+            </div>
+
+            <div className="input-control">
+              <p>
+                <label htmlFor="imgUrl">Image Url:</label>
+              </p>
+              <input {...register("imgUrl")} placeholder="Image url" />
+              <div style={{ color: "red", fontSize: "13px" }}>
+                {errors.imgUrl?.message}
+              </div>
+            </div>
+            <div className="btn">
+              <input type="submit" />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -6,9 +6,9 @@ const port = 8000;
 let idCount = 5;
 let products = [
   {
-    id: 55,
+    id: 0,
     name: "Kylynn Brock",
-    price: 2,
+    price: 2000,
     description: "Eos aute voluptatem voluptatem voluptatem aute ",
     imgUrl:
       "https://dlcdnwebimgs.asus.com/gain/aad81170-e69a-4054-9db1-006a85588c9d/",
@@ -16,7 +16,7 @@ let products = [
   {
     id: 1,
     name: "Kylynn Brock",
-    price: 15,
+    price: 1500,
     description: "Eos aute voluptatem voluptatem voluptatem aute ",
     imgUrl:
       "https://dlcdnwebimgs.asus.com/gain/d895a2b9-233a-4f11-91fd-b22788ac973f/",
@@ -24,7 +24,7 @@ let products = [
   {
     id: 2,
     name: "Kylynn Brock",
-    price: 3,
+    price: 3000,
     description: "Eos aute voluptatem voluptatem voluptatem aute ",
     imgUrl:
       "https://dlcdnwebimgs.asus.com/gain/7449fc82-c00d-474e-8eed-89e2586d5b2e/",
@@ -32,7 +32,7 @@ let products = [
   {
     id: 3,
     name: "Kylynn Brock",
-    price: 28,
+    price: 2800,
     description: "Eos aute voluptatem voluptatem voluptatem aute ",
     imgUrl:
       "https://www.asus.com/media/global/gallery/vat73rr6tsw3q8dz_setting_xxx_0_90_end_2000.png",
@@ -40,7 +40,7 @@ let products = [
   {
     id: 4,
     name: "Kylynn Brock",
-    price: 233,
+    price: 2330,
     description: "Eos aute voluptatem voluptatem voluptatem aute ",
     imgUrl:
       "https://www.asus.com/media/global/gallery/vat73rr6tsw3q8dz_setting_xxx_0_90_end_2000.png",

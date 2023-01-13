@@ -16,8 +16,7 @@ const Products = () => {
   }, []);
 
   const handleSortByPrice = () => {
-    const test = products?.data?.sort((a, b) => a?.price - b?.price);
-    console.log(test);
+    dispatch(fetchData(1));
   };
 
   return (
@@ -62,7 +61,7 @@ const Products = () => {
                       </p>
                       <p className="price">
                         <span className="name">Price:</span>{" "}
-                        <span className="value">{element.price}</span>
+                        <span className="value">{element.price}$</span>
                       </p>
                       <p className="description">
                         <span className="name">Description:</span>{" "}

@@ -8,9 +8,13 @@ const initialState = {
 
 export const fetchData = createAsyncThunk("fetchData", async (value) => {
   const response = await axios.get("http://localhost:8000/products/");
-  return response.data.filter((elem) =>
-    elem.name.toLocaleLowerCase().includes(value.toLocaleLowerCase())
-  );
+  if (value === 1) {
+    return response.data.sort((a, b) => a.price - b.price);
+  } else {
+    return response.data.filter((elem) =>
+      elem.name.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+    );
+  }
 });
 export const deleteData = createAsyncThunk("deleteData", async (id) => {
   await axios.delete(`http://localhost:8000/products/${id}`);

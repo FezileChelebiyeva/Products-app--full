@@ -22,7 +22,7 @@ const DetailsPage = () => {
     <div id="details-page">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>details</title>
+        <title>{product.name}</title>
       </Helmet>
       <div className="container">
         <div className="details">
