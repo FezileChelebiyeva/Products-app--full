@@ -7,10 +7,12 @@ import { Space, Spin } from "antd";
 import SearchComp from "../../components/search";
 import { Link } from "react-router-dom";
 import { Button } from "antd";
+import { addWishlist, removeWishlist } from "../../redux/slice/wishlist";
 
 const Products = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+  const wishlist = useSelector((state) => state.wishlist);
   const cards = useSelector((state) => state.cards);
   useEffect(() => {
     dispatch(fetchData(""));
@@ -19,8 +21,13 @@ const Products = () => {
   const handleSortByPrice = () => {
     dispatch(fetchData(1));
   };
-  const [count, setCount] = useState(8);
-  const [icon, setIcon] = useState(true);
+  const handleWishlist = (product) => {
+    dispatch(addWishlist(product));
+  };
+  const handleRemoveWishlist = (id) => {
+    dispatch(removeWishlist(id));
+  };
+  const [count, setCount] = useState(4);
   return (
     <div id="products-page">
       <Helmet>
@@ -49,13 +56,19 @@ const Products = () => {
             products?.data?.slice(0, count).map((element) => {
               return (
                 <div key={element.id} className="card">
-                  {icon ? (
-                    <div onClick={() => handleWishlist()} className="icon">
-                      {/* <i class={`fa-regular fa-heart ${cards.data ? "red" : null}`}></i> */}
+                  {wishlist.product?.find((el) => el.id == element.id) ? (
+                    <div
+                      onClick={() => handleRemoveWishlist(element.id)}
+                      className="icon"
+                    >
+                      <i className="fa-solid fa-heart"></i>
                     </div>
                   ) : (
-                    <div onClick={() => setIcon(true)} className="icon">
-                      <i className="fa-solid fa-heart"></i>
+                    <div
+                      onClick={() => handleWishlist(element)}
+                      className="icon"
+                    >
+                      <i className={`fa-regular fa-heart`}></i>
                     </div>
                   )}
                   <Link to={`/${element.id}`}>
