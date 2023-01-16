@@ -25,6 +25,12 @@
       padding: 10px 35px;
       border: 1px solid rgb(224, 224, 224);
       border-radius: 15px;
+      .icon{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+        cursor: pointer;
+      }
       .img {
         display: flex;
         justify-content: center;
@@ -62,5 +68,10 @@
         }
       }
     }
+  }
+  .btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
   }
 }

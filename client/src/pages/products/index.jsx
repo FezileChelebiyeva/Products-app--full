@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import { Button } from "antd";
 const Products = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+  const cards = useSelector((state) => state.cards);
   useEffect(() => {
     dispatch(fetchData(""));
   }, []);
@@ -18,7 +19,8 @@ const Products = () => {
   const handleSortByPrice = () => {
     dispatch(fetchData(1));
   };
-
+  const [count, setCount] = useState(8);
+  const [icon, setIcon] = useState(true);
   return (
     <div id="products-page">
       <Helmet>
@@ -44,9 +46,18 @@ const Products = () => {
               </Space>
             </div>
           ) : (
-            products?.data?.map((element) => {
+            products?.data?.slice(0, count).map((element) => {
               return (
                 <div key={element.id} className="card">
+                  {icon ? (
+                    <div onClick={() => handleWishlist()} className="icon">
+                      {/* <i class={`fa-regular fa-heart ${cards.data ? "red" : null}`}></i> */}
+                    </div>
+                  ) : (
+                    <div onClick={() => setIcon(true)} className="icon">
+                      <i className="fa-solid fa-heart"></i>
+                    </div>
+                  )}
                   <Link to={`/${element.id}`}>
                     <div className="img">
                       <img src={element.imgUrl} alt="" />
@@ -100,6 +111,9 @@ const Products = () => {
                   {products.error}
                 </div>
               )}
+        </div>
+        <div className="btn">
+          <Button onClick={() => setCount(count + 4)}>More</Button>
         </div>
       </div>
     </div>
